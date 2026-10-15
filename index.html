@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task Desk</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">✓</span><div><strong>Task Desk</strong><small>Simple task management</small></div></div>
+    <div class="top-actions"><span id="connection" class="connection">Connecting…</span><button id="refreshBtn" class="button secondary">Refresh</button></div>
+  </header>
+  <main class="container">
+    <section class="welcome">
+      <div><p class="eyebrow">YOUR WORKSPACE</p><h1>Stay on top of your tasks.</h1><p class="muted">One simple place to plan, track, and finish your work.</p></div>
+      <div class="date-chip" id="todayLabel">Today</div>
+    </section>
+    <section class="stats">
+      <article class="stat-card"><span>Total tasks</span><strong id="totalCount">—</strong></article>
+      <article class="stat-card"><span>Pending</span><strong id="pendingCount">—</strong></article>
+      <article class="stat-card"><span>Completed</span><strong id="completedCount">—</strong></article>
+      <article class="stat-card"><span>Overdue</span><strong id="overdueCount">—</strong></article>
+    </section>
+    <section class="workspace">
+      <div class="panel task-panel">
+        <div class="panel-heading"><div><h2>Task list</h2><p class="muted">Your tasks are stored in Google Sheets.</p></div>
+          <select id="filterSelect" aria-label="Filter tasks"><option value="all">All tasks</option><option value="pending">Pending</option><option value="completed">Completed</option><option value="overdue">Overdue</option></select>
+        </div>
+        <div id="taskList" class="task-list"><div class="empty">Connecting to your task sheet…</div></div>
+      </div>
+      <aside class="panel form-panel">
+        <h2 id="formHeading">Add a task</h2>
+        <p class="muted">Keep each task clear and actionable.</p>
+        <form id="taskForm">
+          <input type="hidden" id="taskId">
+          <label for="title">Task name</label><input id="title" maxlength="180" required placeholder="e.g. Prepare weekly report">
+          <label for="dueDate">Due date</label><input id="dueDate" type="date">
+          <label for="priority">Priority</label><select id="priority"><option>Medium</option><option>High</option><option>Low</option></select>
+          <label for="notes">Notes (optional)</label><textarea id="notes" rows="3" maxlength="1000" placeholder="Add details…"></textarea>
+          <div class="form-actions"><button type="submit" class="button primary" id="saveBtn">Add task</button><button type="button" class="button secondary hidden" id="cancelBtn">Cancel</button></div>
+        </form>
+        <div class="reminder-note"><span>✉</span><div><strong>Email reminders are automatic</strong><p>Daily at 9:00 AM and 6:00 PM IST, plus a monthly report on the last day of the month.</p></div></div>
+      </aside>
+    </section>
+    <footer>Task Desk · A lightweight personal task portal</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <iframe name="postTarget" id="postTarget" class="hidden-frame" title="Background task save"></iframe>
+  <script src="app.js"></script>
+</body>
+</html>
